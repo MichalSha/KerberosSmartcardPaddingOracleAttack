@@ -30,3 +30,45 @@ our attack and recover users’ (and admins’) credentials before
 expiration. In addition, we describe a remote attack vector
 that allows us to perform the attack and generate queries.
 
+
+## Flush Reload Monitor
+
+A tool to implement Flush and Reload cache attack on Windows. Uses memaccesstime from the Mastik repository (https://github.com/0xADE1A1DE/Mastik/)
+The targets can be either a dll or an exe.  
+> Note, the dll must be the same dll used by an executable - this may not work based on deduplication.  Works on both Native and VMs.
+
+Steps:
+
+> Identify target binaries and offsets. 
+> Identify the delta threshold - cache L3 upper bound in cycles for memaccess time 
+> Compile and run the monitor 
+
+Can monitor between 1 and 3 target binary files each at a given offset.  The output is buffered and output to a file every few seconds. 
+
+
+Compiles with codeblocks:
+```
+"C:\Program Files\CodeBlocks\MinGW\bin\gcc" flush_reload_monitor.c -o flush_reload_monitor.exe
+
+```
+
+Usage: 
+```
+flush_reload_monitor.exe [arguments]
+argument list:
+    --target1 [target1 path]
+    --target2 [target2 path]
+    --target3 [target3 path]
+    --offset1 [offset1]
+    --offset2 [offset2]
+    --offset3 [offset3]
+	--addrcount [addrcount]
+Additional optional arguments:
+    --output [output_file_path]
+    --probe_time [probe_time]
+    --flush_interval [flush_interval]
+    --program_length [program_length in seconds]
+    --delta [delta threshold]
+```
+
+
