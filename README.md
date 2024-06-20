@@ -31,6 +31,20 @@ expiration. In addition, we describe a remote attack vector
 that allows us to perform the attack and generate queries.
 
 
+We provide attack evaluation artifacts offering access to a network setup of our attack model, code implementing both the client side native attack code and the malicious machine-in-the-middle attacker code for our end-to-end-attack, a detailed tutorial on how to use the attack code and tools provided, code for classification and detection of messages, data from experiments performed and code generating the graphs shown in the paper. The code we provide for packet modification can additionally be utilized as a tool enhancing network security analysis.
+
+
+# Dependencies
+
+Several python libraries and tools are used including:
+> pyasn1
+> pydivert
+> windivert
+> numpy
+> matplotlib
+> pycryptodome
+
+
 ## Flush Reload Monitor
 
 A tool to implement Flush and Reload cache attack on Windows. Uses memaccesstime from the Mastik repository (https://github.com/0xADE1A1DE/Mastik/)
@@ -70,5 +84,40 @@ Additional optional arguments:
     --program_length [program_length in seconds]
     --delta [delta threshold]
 ```
+
+---
+
+
+
+
+## Graphs
+
+The code and data for the graphs shown in the paper can be found under the PaperGraphs folder. 
+
+In order to generate Figure 2:
+
+```
+python check_calibration.py 
+```
+
+In order to generate Figure 3:
+
+```
+python plot_query_distribution.py 
+```
+
+
+In order to generate Figure 4:
+
+```
+python plot_sim_results.py 
+```
+
+
+
+
+
+
+
 
 
