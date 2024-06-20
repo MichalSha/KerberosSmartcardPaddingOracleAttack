@@ -46,12 +46,12 @@ with an unprivileged malicious program running on the Client.
 ## Dependencies
 
 Several python libraries and tools are used including:
-> pyasn1
-> pydivert
-> windivert
-> numpy
-> matplotlib
-> pycryptodome
+> pyasn1  
+> pydivert  
+> windivert  
+> numpy  
+> matplotlib  
+> pycryptodome  
 
 
 ## Flush Reload Monitor
