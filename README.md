@@ -36,9 +36,7 @@ We provide attack evaluation artifacts offering access to a network setup of our
 ## Attack Threat Model
 
 Our threat model, shown in ![Threat Model](figure1_kerbattack.pdf), assumes a network with honest servers and
-an honest user trying to log in using an uncompromised smart-
-card and client machine. A malicious MiTM is able to inter-
-cept and modify packets over the network and to communicate
+an honest user trying to log in using an uncompromised smartcard and client machine. A malicious MiTM is able to intercept and modify packets over the network and to communicate
 with an unprivileged malicious program running on the Client.
 
 
