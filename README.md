@@ -99,7 +99,7 @@ Additional optional arguments:
 
 ## Graphs
 
-The code and data for the graphs shown in the paper can be found under the PaperGraphs folder. 
+The code and data for the graphs shown in the paper can be found under the PaperGraphs folder. Note the data files need to be extracted.
 
 In order to generate Figure 2:
 
@@ -121,8 +121,15 @@ python plot_sim_results.py
 ```
 
 
+## Tables
 
+The code and data for the tables shown in the paper can be found under the PaperTables folder. Note the data files need to be extracted.
 
+In order to generate Table 5:
+
+```
+python AnalyzeUnder16kNoisyMay21.py
+```
 
 
 
