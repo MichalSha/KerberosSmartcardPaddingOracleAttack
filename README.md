@@ -131,6 +131,7 @@ In order to generate Table 5:
 python AnalyzeUnder16kNoisyMay21.py
 ```
 
+Tables 6 and 7 were generated manually from the experiment files under the PaperExperiment\\DetectAndEarlyAbort.7z and the PaperExperiment\\KnownMessageAttacks.7z respectively.
 
 
 
