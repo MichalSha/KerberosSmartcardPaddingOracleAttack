@@ -190,7 +190,7 @@ if __name__ == '__main__':
 
     parser.add_argument('-c','--count', default=2, required=False)
     
-    parser.add_argument('-mp','--monitor_program',choices=["..\\frwindb.exe", "..\\frwindb_double.exe", "..\\flush_reload_monitor.exe"], default="..\\flush_reload_monitor.exe", required=False)
+    parser.add_argument('-mp','--monitor_program',choices=["..\\frwindb.exe", "..\\frwindb_double.exe", ".\\flush_reload_monitor.exe"], default=".\\flush_reload_monitor.exe", required=False)
 
     parser.add_argument('-a','--addrcount',default='1', required=False)
     
