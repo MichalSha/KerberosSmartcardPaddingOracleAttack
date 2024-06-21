@@ -53,7 +53,7 @@ to perform the local login.
 For both of the experiments (E1) and (E2), bleich_client will run on the Client machine. 
 On the live setup, this will be done by logging into the Client as user "cryptobob" with password "eval1!" and running:
 ```
-C:\studies\third_clone\FlushAndReloadForWin\michalinthemiddle\bleich_client.py --monitor_port 1960 --with_val T --is_verbose T 
+python C:\studies\third_clone\FlushAndReloadForWin\michalinthemiddle\bleich_client.py --monitor_port 1960 --with_val T --is_verbose T 
 ```
 
 
@@ -63,9 +63,17 @@ C:\studies\third_clone\FlushAndReloadForWin\michalinthemiddle\bleich_client.py -
 (E2) Detection and Early Abort attack
 
 
+```
+python F:\clone4\FlushAndReload\michalinthemiddle\bleich_detector.py --monitor_port 1960 --is_verbose T --with_val T -at full -sb 30 -eb 36 -b135 T -b389 T -dt 0.4
+```
 
+After running the following line - press continue allowing the MiTM to connect to the Client malicious code and start performing the detection of Fast messages and the full attack. 
+Continuous output including the detection of the authentication packets and the results sent by the monitor is printed. After each message, the current state is also printed and written to the output file.
+ 
+The output file will contain current state updates similar to the one below:  
+"current state: 52 not fast, fast 1, fp 10"
 
-
+The interpretation of the line above is that 63 messages were checked. 62 of the messages weren't fast and one message was fast and the attack was performed on it. In 10 cases, there was an initial false positive in the first multiplier and after repetition of this query, the messages were found to be false positives.
 
 
 ## Dependencies
