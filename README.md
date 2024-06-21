@@ -60,6 +60,9 @@ python C:\studies\third_clone\FlushAndReloadForWin\michalinthemiddle\bleich_clie
 (E1) End-to-End attack on a known "fast" message
 > Note: there is an option to use a simulator of a perfect oracle for part of the End-to-End attack  
 
+```
+python F:\clone4\FlushAndReload\michalinthemiddle\bleich_meddler.py --monitor_port 1960 --is_verbose T --with_val T -at full -sb 30 -eb 36 -b135 T -b389 T -dt 0.4
+```
 
 
 
