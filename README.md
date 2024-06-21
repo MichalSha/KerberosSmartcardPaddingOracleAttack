@@ -41,6 +41,33 @@ with an unprivileged malicious program running on the Client.
 
 
 
+## Tutorial
+
+Basic test: Check that Kerberos Smartcard authentication/login is working properly.
+Run network tracing tool on the Client and perform a Smartcard login. Apply packet filter "kerberos.msg_type ==11". If no packets are found, the smartcard
+network login isn’t being performed. This can happen when
+the Client has a network issue and uses the cached credentials
+to perform the local login.
+
+
+For both of the experiments (E1) and (E2), bleich_client will run on the Client machine. 
+On the live setup, this will be done by logging into the Client as user "cryptobob" with password "eval1!" and running:
+```
+C:\studies\third_clone\FlushAndReloadForWin\michalinthemiddle\bleich_client.py --monitor_port 1960 --with_val T --is_verbose T 
+```
+
+
+(E1) End-to-End attack on a known "fast" message
+> Note: there is an option to use a simulator of a perfect oracle for part of the End-to-End attack  
+
+(E2) Detection and Early Abort attack
+
+
+
+
+
+
+
 ## Dependencies
 
 Several python libraries and tools are used including:
@@ -49,7 +76,7 @@ Several python libraries and tools are used including:
 > numpy  
 > matplotlib  
 > pycryptodome  
-> pyconsol_ctrl  
+> consol_ctrl  
 
 Tools:  
 > windivert  
@@ -99,7 +126,57 @@ Additional optional arguments:
 
 ---
 
+## Bleich Client
 
+Rus the native code that monitors the cache on the Client and connects to the MiTM.
+
+
+The malicious code running on the client. 
+The client malicious code returns the number of hits for each attempt. Up to 3 addresses can be monitored. 
+
+
+
+Requires: 
+tshark
+python package console_ctrl
+```
+pip install console_ctrl
+```
+
+Usage:
+
+```
+bleich_client.py [-h] [-ug USE_GUI] [-p USE_PIV_TOOL] [-c COUNT]
+                        [-mp {..\flush_reload_monitor.exe}] [-a ADDRCOUNT]
+                        [--monitor_ip MONITOR_IP] [--monitor_port MONITOR_PORT] [-b1 FIRST_BIN] [-o1 FIRST_OFFSET]
+                        [-b2 SECOND_BIN] [-o2 SECOND_OFFSET] [-b3 THIRD_BIN] [-o3 THIRD_OFFSET] [-fi FLUSH_INTERVAL]
+                        [-ml MONITOR_LENGTH] [-pt PROBE_TIME] [-d DELTA] [--is_verbose IS_VERBOSE]
+                        [--with_val WITH_VAL] [--on_win11 ON_WIN11]
+
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -ug USE_GUI, --use_gui USE_GUI
+  -p USE_PIV_TOOL, --use_piv-tool USE_PIV_TOOL
+  -c COUNT, --count COUNT
+  -mp {..\frwindb.exe,..\frwindb_double.exe,..\flush_reload_monitor.exe}, --monitor_program {..\frwindb.exe,..\frwindb_double.exe,..\flush_reload_monitor.exe}
+  -a ADDRCOUNT, --addrcount ADDRCOUNT
+  --monitor_ip MONITOR_IP
+  --monitor_port MONITOR_PORT
+  -b1 FIRST_BIN, --first_bin FIRST_BIN
+  -o1 FIRST_OFFSET, --first_offset FIRST_OFFSET
+  -b2 SECOND_BIN, --second_bin SECOND_BIN
+  -o2 SECOND_OFFSET, --second_offset SECOND_OFFSET
+  -b3 THIRD_BIN, --third_bin THIRD_BIN
+  -o3 THIRD_OFFSET, --third_offset THIRD_OFFSET
+  -fi FLUSH_INTERVAL, --flush_interval FLUSH_INTERVAL
+  -ml MONITOR_LENGTH, --monitor_length MONITOR_LENGTH
+  -pt PROBE_TIME, --probe_time PROBE_TIME
+  -d DELTA, --delta DELTA
+  --is_verbose IS_VERBOSE
+  --with_val WITH_VAL
+  --on_win11 ON_WIN11
+```
 
 
 ## Graphs
