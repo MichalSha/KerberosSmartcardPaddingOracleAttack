@@ -41,7 +41,7 @@ with an unprivileged malicious program running on the Client.
 
 
 
-## Tutorial
+## Tutorial On the Live Setup
 
 Basic test: Check that Kerberos Smartcard authentication/login is working properly.
 Run network tracing tool on the Client and perform a Smartcard login. Apply packet filter "kerberos.msg_type ==11". If no packets are found, the smartcard
@@ -60,6 +60,9 @@ python C:\studies\third_clone\FlushAndReloadForWin\michalinthemiddle\bleich_clie
 (E1) End-to-End attack on a known "fast" message
 > Note: there is an option to use a simulator of a perfect oracle for part of the End-to-End attack  
 
+
+
+
 (E2) Detection and Early Abort attack
 
 
@@ -74,6 +77,8 @@ The output file will contain current state updates similar to the one below:
 "current state: 52 not fast, fast 1, fp 10"
 
 The interpretation of the line above is that 63 messages were checked. 62 of the messages weren't fast and one message was fast and the attack was performed on it. In 10 cases, there was an initial false positive in the first multiplier and after repetition of this query, the messages were found to be false positives.
+
+The attack can take several hours and in some cases the computers can go to sleep. 
 
 
 ## Dependencies
