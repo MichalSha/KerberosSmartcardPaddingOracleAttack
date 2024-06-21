@@ -46,10 +46,15 @@ with an unprivileged malicious program running on the Client.
 Several python libraries and tools are used including:
 > pyasn1  
 > pydivert  
-> windivert  
 > numpy  
 > matplotlib  
 > pycryptodome  
+> pyconsol_ctrl  
+
+Tools:  
+> windivert  
+> tshark  
+
 
 
 ## Flush Reload Monitor
