@@ -39,6 +39,24 @@ https://eprint.iacr.org/2024/xxxxx
 
 > Note: this link will be updated once the embargo has lifted.
 
+> Additional setup information:
+
+Client supported OS builds of Windows: 19045 
+Client setup used a Dell Inspiron 5520 with Dual core intel KabyLake. 
+
+Server supported versions: Windows Server 2019, Windows Server 2022 and previous versions. 
+Server is a hosted virtual machine set at 2 cores. This is a minimal setting for the server function. Live setup is hosted by a NUC.
+
+> Approximate resources for (C1) and (C2) (both Client and Server):
+
+Memory: 16 GB RAM
+Disk spacE: 1GB
+
+
+
+
+
+
 ## Attack Threat Model
 
 Our threat model, shown in ![Threat Model](figure1_kerbattack.pdf), assumes a network with honest servers and
