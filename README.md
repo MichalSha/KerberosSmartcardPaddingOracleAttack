@@ -35,7 +35,7 @@ We provide attack evaluation artifacts offering access to a network setup of our
 
 
 > The paper can be found at:
-https://eprint.iacr.org/2024/xxxxx
+https://www.usenix.org/system/files/usenixsecurity24-shagam.pdf
 
 > Note: this link will be updated once the embargo has lifted.
 
