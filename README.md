@@ -53,7 +53,17 @@ Memory: 16 GB RAM
 Disk spacE: 1GB
 
 
+## Allocated CVEs
 
+We were allocated two CVEs with high severity. 
+
+From OpenSC:
+
+https://github.com/OpenSC/OpenSC/wiki/CVE-2023-5992
+
+From Microsoft:
+
+https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-29995
 
 
 
